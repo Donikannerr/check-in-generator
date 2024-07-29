@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Typography, Button, Box, IconButton } from "@mui/material";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
+import { useSpring, animated } from "@react-spring/web";
 import AnimatedBackground from "../assets/animated-bg.svg";
 
 const questions = [
@@ -37,12 +38,14 @@ const shuffleArray = (array: string[]): string[] => {
 const CheckInGenerator: React.FC = () => {
   const [shuffledQuestions, setShuffledQuestions] = useState<string[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [direction, setDirection] = useState("forward");
 
   useEffect(() => {
     setShuffledQuestions(shuffleArray(questions));
   }, []);
 
   const handleNext = () => {
+    setDirection("forward");
     if (currentQuestionIndex < shuffledQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
@@ -52,10 +55,25 @@ const CheckInGenerator: React.FC = () => {
   };
 
   const handlePrevious = () => {
+    setDirection("backward");
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(currentQuestionIndex - 1);
     }
   };
+
+  const props = useSpring({
+    opacity: 1,
+    transform: `translateX(0)`,
+    from: {
+      opacity: 0,
+      transform: direction === "forward" ? `translateX(100%)` : `translateX(-100%)`,
+    },
+    reset: true,
+    config: {
+      tension: 210,
+      friction: 20,
+    },
+  });
 
   return (
     <Box
@@ -79,8 +97,8 @@ const CheckInGenerator: React.FC = () => {
           height: "100%",
           top: 0,
           left: 0,
-          objectFit: "cover", // Ensure the SVG covers the whole area
-          zIndex: 0, // Ensure it is behind other content
+          objectFit: "cover",
+          zIndex: 0,
         }}
       />
 
@@ -93,7 +111,7 @@ const CheckInGenerator: React.FC = () => {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          zIndex: 1, // Ensure it is above the background
+          zIndex: 1,
         }}
       >
         <Box
@@ -107,9 +125,11 @@ const CheckInGenerator: React.FC = () => {
           <IconButton onClick={handlePrevious} sx={{ color: "#000" }}>
             <ArrowBack />
           </IconButton>
-          <Typography variant="h5" component="div" sx={{ mx: 2 }}>
-            {shuffledQuestions[currentQuestionIndex]}
-          </Typography>
+          <animated.div style={props}>
+            <Typography variant="h5" component="div" sx={{ mx: 2 }}>
+              {shuffledQuestions[currentQuestionIndex]}
+            </Typography>
+          </animated.div>
           <IconButton onClick={handleNext} sx={{ color: "#000" }}>
             <ArrowForward />
           </IconButton>
