@@ -3,7 +3,6 @@ import { Container, Typography, Button, Box, IconButton } from "@mui/material";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import AnimatedBackground from "../assets/animated-bg.svg";
 
-// Alle Fragen
 const questions = [
   "Welches Emoji beschreibt gerade deine Stimmung?",
   "Was war eines deiner Highlights der letzten Zeit?",
