@@ -23,6 +23,17 @@ const questions = [
   "Was wäre dein Einlaufmusik, wenn du ein Wrestler wärst?",
   "Was ist eines der Ratschläge, die du beherzigst?",
   "Popcorn --> süß oder salzig?",
+  "Welches Gericht kochst du am liebsten und warum?",
+  "Wie würdest du deinen idealen Arbeitstag beschreiben?",
+  "Welche Trends oder Entwicklungen verfolgst du momentan besonders interessiert?",
+  "Gibt es eine besondere Tradition oder ein Ritual, das du pflegst?",
+  "Wie lautet dein ultimativer Geheimtipp für Produktivität?",
+  "Was ist die merkwürdigste oder originellste Geschenkidee, die du je erhalten hast?",
+  "Was ist dein geheimer Trick, um dich in schwierigen Situationen zu beruhigen?",
+  "Welches exotische Essen möchtest du unbedingt mal probieren?",
+  "Wenn du für einen Tag unsichtbar sein könntest, was würdest du tun?"
+
+
 ];
 
 // Fragen mischen
